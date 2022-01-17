@@ -53,7 +53,7 @@ app.get("/statement", verifiyIfExistsAccountCPF, (request, response) => {
 
 app.post("/deposit", verifiyIfExistsAccountCPF, (request, response) => {
   const { customer } = request;
-  const { description, amount } = request.body;
+  const { description, amount } = request.body
 
   const statementOperation = {
     description,
@@ -98,6 +98,15 @@ app.get("/statement/date", verifiyIfExistsAccountCPF, (request, response) => {
   );
   
   return response.json(statement);
+});
+
+app.put("/account",verifiyIfExistsAccountCPF,(request,response) => {
+    const {name} = request.body;
+    const {customer} = request;
+
+    customer.name = name;
+
+    return response.status(201).send();
 });
 
 app.listen(3333);
